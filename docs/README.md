@@ -209,26 +209,28 @@ disallowed due to limitations of some workspace tools.
 | `pch_header` | Specifies the precompiled header file name |
 | `pch_source` | Specifies the precompiled source file name |
 | `postbuild` | If this is defined in the project, the value will be interpreted as commands to run after the project has been successfully built.  The <%..%> construct can be used within this value to access template variables and functions of the template parser. In addition, the following pseudo variables can be used.
-
-                  <%cat%>    - Platform non-specific command to cat a file.
-                  <%cmp%>    - Platform non-specific compare command.
-                  <%cp%>     - Platform non-specific copy command.
-                  <%mkdir%>  - Platform non-specific mkdir command.
-                  <%mv%>     - Platform non-specific move command.
-                  <%os%>     - Returns either win32 or unix.
-                  <%rm%>     - Platform non-specific delete command.
-                  <%rmdir%>  - Platform non-specific recursive directory delete command.
-                  <%nul%>    - Platform non-specific null device.
-                  <%pathsep%>- Platform non-specific path separator (; or :).
-                  <%gt%>     - Project non-specific greater than sign.
-                  <%lt%>     - Project non-specific less than sign.
-                  <%and%>    - Project non-specific and sign.
-                  <%or%>     - Project non-specific or sign.
-                  <%quote%>  - Project non-specific double quote.
-                  <%slash%>  - Platform non-specific directory separator.
-                  <%equote%> - Project non-specific escaped quote.
-                  <%crlf%>   - Platform non-specific line ending.
-                  <%cmdsep%> - Project/platform non-specific command separator which always runs the right-hand side command. |
+```
+    <%cat%>    - Platform non-specific command to cat a file.
+    <%cmp%>    - Platform non-specific compare command.
+    <%cp%>     - Platform non-specific copy command.
+    <%mkdir%>  - Platform non-specific mkdir command.
+    <%mv%>     - Platform non-specific move command.
+    <%os%>     - Returns either win32 or unix.
+    <%rm%>     - Platform non-specific delete command.
+    <%rmdir%>  - Platform non-specific recursive directory delete command.
+    <%nul%>    - Platform non-specific null device.
+    <%pathsep%>- Platform non-specific path separator (; or :).
+    <%gt%>     - Project non-specific greater than sign.
+    <%lt%>     - Project non-specific less than sign.
+    <%and%>    - Project non-specific and sign.
+    <%or%>     - Project non-specific or sign.
+    <%quote%>  - Project non-specific double quote.
+    <%slash%>  - Platform non-specific directory separator.
+    <%equote%> - Project non-specific escaped quote.
+    <%crlf%>   - Platform non-specific line ending.
+    <%cmdsep%> - Project/platform non-specific command separator which always runs the right-hand side command.
+```
+                  |
 `prebuild`        This is similar to postbuild except that it will be
                 performed before the build instead of after.
 `postclean`       This is similar to postbuild except that it will be
