@@ -208,7 +208,7 @@ disallowed due to limitations of some workspace tools.
 | `no_pch`    | This keyword can only be used as a source component scoped setting (ie. inside the scope of Source_Files). It specifies that precompiled headers should not be used for the source files listed within the scope of it's setting. |
 | `pch_header` | Specifies the precompiled header file name |
 | `pch_source` | Specifies the precompiled source file name |
-| `postbuild` | If this is defined in the project, the value will be interpreted as commands to run after the project has been successfully built.  The <%..%> construct can be used within this value to access template variables and functions of the template parser. In addition, the following pseudo variables can be used.
+| `postbuild` | If this is defined in the project, the value will be interpreted as commands to run after the project has been successfully built.  The `<%..%>` construct can be used within this value to access template variables and functions of the template parser. In addition, the following pseudo variables can be used.
 ```
     <%cat%>    - Platform non-specific command to cat a file.
     <%cmp%>    - Platform non-specific compare command.
