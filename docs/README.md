@@ -1,6 +1,4 @@
-
-
-.:: 3/13/2002 ::.
+# MPC
 
 The Makefile, Project and Workspace Creator.
 Designed by Justin Michel (michel_j@ociweb.com) and Chad Elliott.
@@ -42,14 +40,15 @@ workspace creator, then the current directory is traversed and any mpc files
 located will be part of the workspace that is generated.
 
 
-Workspace Declarations
-----------------------
+## Workspace Declarations
 
+```
 workspace(workspace_name) {
   file.mpc
   directory
   relative/path/to/another/mwc_file
 }
+```
 
 Workspaces can contain individual mpc files, directories or other mwc files.
 In the case of a directory, the workspace creator will traverse it and use
@@ -62,6 +61,7 @@ files should have an 'mwc' extension.
 You can exclude directories and .mpc files from a workspace using the 'exclude'
 scope operator:
 
+```
 workspace {
   dir1
   dir2
@@ -102,6 +102,7 @@ workspace {
     rpm_version = 1.0
   }
 }
+```
 
 The associate scope associates a name with one or more directories.
 This does not add directories to a workspace, it only makes an
@@ -127,9 +128,9 @@ together common workspace/project types. More details on properties
 in MPC can be found in the section on the 'specific' keyword in the
 Project Declarations section below.
 
-Project Declarations
---------------------
+## Project Declarations
 
+```
 project(project_name) : baseproject, anotherbaseproject {
   exename   = foo
   includes += "."
@@ -151,7 +152,7 @@ project(project_name) : baseproject, anotherbaseproject {
     fileN.h
   }
 }
-
+```
 
 MPC expects all files to be listed with forward slashes (/) if a file name
 contains a directory.  Providing files with back slashes (\) can cause
@@ -174,7 +175,9 @@ If the project name or workspace name contains an asterisk (*) then the
 default project (workspace) name will be used in its place.  For example, if
 the mpc file is named example.mpc and it contains the following:
 
+```
 project(*client) {
+```
 
 The project name will be example_client.  If the any part of the modified
 project (workspace) name contains a capital letter then each word will be
@@ -189,37 +192,39 @@ If multiple projects are going to be contained within a single workspace
 (using mwc.pl), there can be no duplication of project names.  This is
 disallowed due to limitations of some workspace tools.
 
-Project Keywords
-----------------
-exename         Specifies the name of the executable that will be created
-sharedname      Specifies the name of the shared library that will be created
-staticname      Specifies the name of the static library that will be created
-buildflags      This keyword can only be used as a source component scoped
+## Project Keywords
+
+| keyword | description |
+| --- | --- |
+| `exename` | Specifies the name of the executable that will be created |
+| `sharedname` | Specifies the name of the shared library that will be created |
+| `staticname` |  Specifies the name of the static library that will be created |
+| `buildflags` | This keyword can only be used as a source component scoped
                 setting (ie. inside the scope of Source_Files).  It
                 specifies additional build flags that will be passed to the
-                compiler as the source files are being compiled.
-dependent_upon  This keyword can only be used as a header component scoped
+                compiler as the source files are being compiled. |
+| `dependent_upon` | This keyword can only be used as a header component scoped
                 setting (ie. inside the scope of Header_Files).  It
                 determines which file the header file is dependent
-                upon for vc8, and vc9 only.
-dllout          If defined, specifies where the dynamic libraries will be
-                placed.  This overrides libout in the dynamic case.
-libout          Specifies where the dynamic and static libraries will be placed
-exeout          Specifies where executables will be placed (Previously known
-                as install)
-managed         This keyword can be used as a global setting or as a source
+                upon for vc8, and vc9 only. |
+| `dllout`    | If defined, specifies where the dynamic libraries will be
+                placed.  This overrides libout in the dynamic case. |
+| `libout`    | Specifies where the dynamic and static libraries will be placed |
+| `exeout`    | Specifies where executables will be placed (Previously known
+                as install) |
+| `managed`   | This keyword can be used as a global setting or as a source
                 component scoped setting (ie. inside the scope of
                 Source_Files).  It specifies that the source files should be
                 compiled as managed C++.  Since this is Microsoft specific, it
                 is only supported by the nmake, vc7 - vc14, and vs*
-                project types.
-no_pch          This keyword can only be used as a source component scoped
+                project types. |
+| `no_pch`    | This keyword can only be used as a source component scoped
                 setting (ie. inside the scope of Source_Files).  It
                 specifies that precompiled headers should not be used for
-                the source files listed within the scope of it's setting.
-pch_header      Specifies the precompiled header file name
-pch_source      Specifies the precompiled source file name
-postbuild       If this is defined in the project, the value will be
+                the source files listed within the scope of it's setting. |
+`pch_header`      Specifies the precompiled header file name
+`pch_source`      Specifies the precompiled source file name
+`postbuild`       If this is defined in the project, the value will be
                 interpreted as commands to run after the project has been
                 successfully built.  The <%..%> construct can be used within
                 this value to access template variables and functions of the
@@ -247,46 +252,46 @@ postbuild       If this is defined in the project, the value will be
                   <%crlf%>   - Platform non-specific line ending.
                   <%cmdsep%> - Project/platform non-specific command separator
                                which always runs the right-hand side command.
-prebuild        This is similar to postbuild except that it will be
+`prebuild`        This is similar to postbuild except that it will be
                 performed before the build instead of after.
-postclean       This is similar to postbuild except that it will be
+`postclean`       This is similar to postbuild except that it will be
                 performed after cleaning up the project (the realclean
                 target for make based project types).  NOTE: This is not
                 used in the IDE based project types since there is no hook
                 for such an action.
-recurse         If set to 1, MPC will recurse into directories listed under
+`recurse`         If set to 1, MPC will recurse into directories listed under
                 component listings and add any component corresponding files
                 to the list.  This keyword can be used as a global project
                 setting or a component scoped setting.
-version         Specifies the version number for the library or executable
-macros          These values will be passed as macros to the compiler.
-libpaths        Specifies 1 or more locations to find libraries
-recursive_libpaths Specifies 1 or more locations to find libraries which will
+`version`         Specifies the version number for the library or executable
+`macros`          These values will be passed as macros to the compiler.
+`libpaths`        Specifies 1 or more locations to find libraries
+`recursive_libpaths` Specifies 1 or more locations to find libraries which will
                 be added recursively.
-includes        Specifies 1 or more locations to find include files
-libs            Specifies 1 or more libraries to link into the exe or library
-recursive_includes Specifies 1 or more locations to find include files which
+`includes`        Specifies 1 or more locations to find include files
+`libs`            Specifies 1 or more libraries to link into the exe or library
+`recursive_includes` Specifies 1 or more locations to find include files which
                 will be added recursively.
-lit_libs        Specifies 1 or more libraries to link into the exe or library.
+`lit_libs`        Specifies 1 or more libraries to link into the exe or library.
                 If libraries receive a library decorator, then these will not.
-pure_libs       Specifies 1 or more libraries to link into the exe or library.
+`pure_libs`       Specifies 1 or more libraries to link into the exe or library.
                 The values specified for this variable are passed to the
                 linker unmodified.
-after           Specifies that this project must be built after 1 or more
+`after`           Specifies that this project must be built after 1 or more
                 project names listed.  An extended syntax is available in
                 order to associate name-value pairs with a dependency:
                 <project name[:name=value]>
                 These name-value pairs may be used in the creation of the
                 dependencies of the project.
-custom_only     Create a project that contains only custom generation
+`custom_only`     Create a project that contains only custom generation
                 targets (any file type described by a Define_Custom section).
                 This will automatically be set to 1 when a project contains
                 no source or resource files, but does contain custom input
                 files.
-dynamicflags    Specifies preprocessor flags needed for dynamic libraries
-staticflags     Specifies preprocessor flags needed for static libraries
+`dynamicflags`    Specifies preprocessor flags needed for dynamic libraries
+`staticflags`     Specifies preprocessor flags needed for static libraries
 
-verbatim        This allows arbitrary information to be place in a generated
+`verbatim`        This allows arbitrary information to be place in a generated
                 project file.  The syntax is as follows:
 
                 verbatim(<project type>, <location>[, 1]) {
@@ -303,7 +308,7 @@ verbatim        This allows arbitrary information to be place in a generated
                 to preserve white space, the line or lines should be placed
                 inside double quotes.
 
-specific        This scope allows assignments that are specific to a
+`specific`        This scope allows assignments that are specific to a
                 particular project type or property.  The syntax is as
                 follows:
 
@@ -372,7 +377,7 @@ specific        This scope allows assignments that are specific to a
                   Debug::defines += FOO
                 }
 
-expand          This scope allows the specification for a variable that is
+`expand`          This scope allows the specification for a variable that is
                 found within $() to be expanded from the list of possible
                 values.  These possible values can contain environment
                 variables (specified by $VAR_NAME) and plain text.  If a
@@ -389,7 +394,7 @@ expand          This scope allows the specification for a variable that is
                   <possible value n>
                 }
 
-conditional     This scope allows addition of source files conditionally
+`conditional`     This scope allows addition of source files conditionally
                 based on a particular project type or property as describe
                 in the 'specific' section.  The syntax is as follows:
 
@@ -414,37 +419,40 @@ conditional     This scope allows addition of source files conditionally
                 the conditional to be evaluated for all types except the
                 type specified.
 
-requires        Specifies which features should be enabled in order to
+`requires`        Specifies which features should be enabled in order to
                 generate the project file.
-avoids          Specifies which features should be disabled in order to
+`avoids`          Specifies which features should be disabled in order to
                 generate the project file.
-webapp          Determines whether the project is a Web Application or not.
+`webapp`          Determines whether the project is a Web Application or not.
                 A web application project will have no project file written
                 but the information will be included in the workspace (if
                 web applications are supported by the project type).
 
-C# Specific Project Keywords
-----------------------------
-dependent_upon  This can only be applied to source and resx components.  It
+## C# Specific Project Keywords
+
+| keyword | description |
+| --- | --- |
+| `dependent_upon` | This can only be applied to source and resx components.  It
                 determines which file the source or resx file is dependent
-                upon for vc8 - vc14, vs* only.
-generates_source This can only be applied to resx components.  It indicates
+                upon for vc8 - vc14, vs* only. |
+| `generates_source` | This can only be applied to resx components.  It indicates
                 that the resx file or files auto generates a source file for
                 vc8 - vc14, vs* only.  A value of '1' indicates that the
                 resx file generates a source file and the default generator is
                 used. Any other value indicates that the resx file generates a
                 source file and the generator name is taken from the value
                 supplied.  The auto generated name is created by taking the
-                resx file without the extension and appending .Designer.cs.
-subtype         This can only be applied to source and resx components.  It
-                determines the SubType setting for vc8 - vc14, vs* only.
+                resx file without the extension and appending .Designer.cs. |
+| `subtype`   | This can only be applied to source and resx components.  It
+                determines the SubType setting for vc8 - vc14, vs* only. |
 
-Custom File Definitions
------------------------
+## Custom File Definitions
+
 In order to support a variety of custom build rules, MPC allows you to
 define your own custom file types.  Below is an example of a custom
 definition.
 
+```
 project {
   Define_Custom(MOC) {
     automatic_in     = 0
@@ -467,6 +475,7 @@ project {
     QtReactor_moc.cpp
   }
 }
+```
 
 The above example defines a custom file type "MOC" which describes basic
 information about how to process the input files and what output files are
@@ -475,8 +484,10 @@ order to specify the input files for this new file type.
 
 Define_Custom definitions may use single inheritance.  This is useful for
 creating aliased names:
+```
   Define_Custom(QtMOC) : MOC {
   }
+```
 
 Here is a list of keywords that can be used within the scope of
 Define_Custom or Modify_Custom:
@@ -716,6 +727,7 @@ Below is an example that demonstrates the use of '>>'.  The command takes an
 input file name of foo.prp and produces two files that have completely
 unrelated filenames (i.e. foo !~ hello).
 
+```
 project {
   Define_Custom(Quogen) {
     automatic_in        = 0
@@ -735,14 +747,17 @@ project {
     hello.cpp
   }
 }
+```
 
 You can use the '<<' construct to represent dependencies for specific custom
 input file.  For instance, in the above example, assume that foo.prp depends
 upon foo.in, we would represent this by adding << foo.in as shown below.
 
-  Quogen_Files {
-    foo.prp >> hello.h hello.cpp << foo.in
-  }
+```
+Quogen_Files {
+  foo.prp >> hello.h hello.cpp << foo.in
+}
+```
 
 There is a construct that can be used within a Define_Custom section
 called 'optional' and can be used to represent optional custom output
@@ -765,6 +780,7 @@ value.  If it is found, then the 'value' after the += is added to the list
 specified by 'keyword'.  This can also be negated by prefixing 'option' with
 an exclamation point (!).
 
+```
 project {
   Define_Custom(IDL) {
     source_pre_extension = C, S
@@ -773,6 +789,7 @@ project {
     }
   }
 }
+```
 
 In the preceding example, the source_pre_extension contains C and S.  The
 optional clause can be read as follows: If 'commandflags' contains -GA then
@@ -791,15 +808,17 @@ can be used to augment or override the values of the same name defined in a
 Define_Custom section. gendir can be used to specify the directory in which
 the generated output will go.  Below is an example:
 
-  MOC_Files {
-    commandflags += -nw
-    gendir = moc_generated
-    QtReactor.h
-  }
+```
+MOC_Files {
+  commandflags += -nw
+  gendir = moc_generated
+  QtReactor.h
+}
 
-  Source_Files {
-    moc_generated/QtReactor_moc.cpp
-  }
+Source_Files {
+  moc_generated/QtReactor_moc.cpp
+}
+```
 
 In the above example, the generated file (QtReactor_moc.cpp) is placed in
 the moc_generated directory and the -nw option is added to commandflags.
@@ -811,6 +830,7 @@ specified by gendir.
 The following example illustrates the use of the keyword mapping capability
 of the Define_Custom:
 
+```
 project {
   Define_Custom(CIDL) {
     automatic_in      = 0
@@ -842,13 +862,14 @@ project {
     another_file.cidl
   }
 }
+```
 
 A Modify_Custom section can be used to modify an existing custom definition.
 The Define_Custom must be processed prior to processing a Modify_Custom
 section; otherwise, an error will occur.
 
-Special type of feature project
--------------------------------
+## Special type of feature project
+
 A feature project contains information as a project would, but can only
 be a base project and will only be added to a sub project if the features
 that it requires (or avoids) are present.
@@ -861,6 +882,7 @@ Each feature will be logically anded together.
 
 The following feature definition requires that the qt feature be enabled.
 
+```
 feature(qt) {
   Define_Custom(MOC) {
     automatic_in     = 0
@@ -880,18 +902,20 @@ feature(qt) {
     QtSpecific_moc.cpp
   }
 }
+```
 
 Assuming that the above feature definition is stored in a file named
 qt_specific.mpb, an mpc project could inherit from it and would only receive
 the feature definition if the qt feature was enabled.
 
+```
 project: qt_specific {
   ...
 }
+```
 
+## Feature Files
 
-Feature Files
--------------
 Features are enabled and disable within feature files or through the use of
 the -features option (see USAGE for more details).  The first feature file
 read is always global.features found in the config directory.  The second
@@ -936,8 +960,8 @@ forcount        By default, a one based index number of the foreach
 If the list variable ('includes' in the above example) is a function call,
 it is necessary to provide both a variable name and a base count number.
 
-Project Variable and Template Input Variable Interaction
---------------------------------------------------------
+## Project Variable and Template Input Variable Interaction
+
 Project variables and template input variables are separate entities and in
 the context of the TemplateParser, template input variables have precedence
 over project variables.
@@ -959,8 +983,8 @@ requires
 avoids
 macros
 
-Workspaces
-----------
+## Workspaces
+
 Workspaces (mwc files) can have assignments similar to projects.  There are
 currently only two assignments allowed.
 
@@ -980,18 +1004,18 @@ base project (similar to the -base option).  In this case, implicit is
 enabled and each implicitly generate project file will have the base project
 or base projects (when addition is used) when the project is created.
 
-Defaulting Behavior
--------------------
-1) If a project name is not specified:
+## Defaulting Behavior
+
+1. If a project name is not specified:
 
    it will be defaulted to the name of the mpc file without the extension
 
-2) If a particular list is not specified (Source_Files, Header_Files, etc.):
+2. If a particular list is not specified (Source_Files, Header_Files, etc.):
 
    all of the files in the directory will be added to the corresponding list
    by extension
 
-3) If the custom type is automatic (both input and output) and custom files
+3. If the custom type is automatic (both input and output) and custom files
    (ex., idl files) exist in the directory and the custom files components
    (ex., IDL_Files) are left defaulted (i.e. not listed) or the custom files
    components are specified and none of the custom generated files are listed
@@ -1001,31 +1025,31 @@ Defaulting Behavior
    weren't specified and all of the (would be) generated files will be added
    to the front of the corresponding lists (source, inline and header lists)
 
-4) If files are listed in the Source_Files list and a corresponding header or
+4. If files are listed in the Source_Files list and a corresponding header or
    inline file exists:
 
    the corresponding file will be added to the corresponding list (if it
    isn't already there)
 
-5) If a sharedname is specified and staticname is not:
+5. If a sharedname is specified and staticname is not:
 
    staticname is assigned the sharedname value (the same applies if
    staticname is specified and sharedname is not)
 
-6) If exename is specified then the project target is considered an
+6. If exename is specified then the project target is considered an
    executable.  If neither exename, sharedname or staticname are used and
    any of the source files listed contains a language dependent "main", then
    the project target is considered an executable, otherwise it is considered
    a library.
 
-7) If pch_header is not specified and a header file matches *_pch.h:
+7. If pch_header is not specified and a header file matches *_pch.h:
 
    it is assumed to be the precompiled header file (the same applies to
    pch_source)
 
-Processing Order
-----------------
-1) Project file is read
-2) Template input file is read
-3) Template file is read
-4) Output project is written
+## Processing Order
+
+1. Project file is read
+2. Template input file is read
+3. Template file is read
+4. Output project is written
