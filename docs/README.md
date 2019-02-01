@@ -199,37 +199,16 @@ disallowed due to limitations of some workspace tools.
 | `exename` | Specifies the name of the executable that will be created |
 | `sharedname` | Specifies the name of the shared library that will be created |
 | `staticname` |  Specifies the name of the static library that will be created |
-| `buildflags` | This keyword can only be used as a source component scoped
-                setting (ie. inside the scope of Source_Files).  It
-                specifies additional build flags that will be passed to the
-                compiler as the source files are being compiled. |
-| `dependent_upon` | This keyword can only be used as a header component scoped
-                setting (ie. inside the scope of Header_Files).  It
-                determines which file the header file is dependent
-                upon for vc8, and vc9 only. |
-| `dllout`    | If defined, specifies where the dynamic libraries will be
-                placed.  This overrides libout in the dynamic case. |
+| `buildflags` | This keyword can only be used as a source component scoped setting (ie. inside the scope of Source_Files). It specifies additional build flags that will be passed to the compiler as the source files are being compiled. |
+| `dependent_upon` | This keyword can only be used as a header component scoped setting (ie. inside the scope of Header_Files). It determines which file the header file is dependent upon for vc8, and vc9 only. |
+| `dllout`    | If defined, specifies where the dynamic libraries will be placed.  This overrides libout in the dynamic case. |
 | `libout`    | Specifies where the dynamic and static libraries will be placed |
-| `exeout`    | Specifies where executables will be placed (Previously known
-                as install) |
-| `managed`   | This keyword can be used as a global setting or as a source
-                component scoped setting (ie. inside the scope of
-                Source_Files).  It specifies that the source files should be
-                compiled as managed C++.  Since this is Microsoft specific, it
-                is only supported by the nmake, vc7 - vc14, and vs*
-                project types. |
-| `no_pch`    | This keyword can only be used as a source component scoped
-                setting (ie. inside the scope of Source_Files).  It
-                specifies that precompiled headers should not be used for
-                the source files listed within the scope of it's setting. |
-`pch_header`      Specifies the precompiled header file name
-`pch_source`      Specifies the precompiled source file name
-`postbuild`       If this is defined in the project, the value will be
-                interpreted as commands to run after the project has been
-                successfully built.  The <%..%> construct can be used within
-                this value to access template variables and functions of the
-                template parser. In addition, the following pseudo variables
-                can be used.
+| `exeout`    | Specifies where executables will be placed (Previously known as install) |
+| `managed`   | This keyword can be used as a global setting or as a source component scoped setting (ie. inside the scope of Source_Files). It specifies that the source files should be compiled as managed C++.  Since this is Microsoft specific, it is only supported by the nmake, vc7 - vc14, and vs* project types. |
+| `no_pch`    | This keyword can only be used as a source component scoped setting (ie. inside the scope of Source_Files). It specifies that precompiled headers should not be used for the source files listed within the scope of it's setting. |
+| `pch_header` | Specifies the precompiled header file name |
+| `pch_source` | Specifies the precompiled source file name |
+| `postbuild` | If this is defined in the project, the value will be interpreted as commands to run after the project has been successfully built.  The <%..%> construct can be used within this value to access template variables and functions of the template parser. In addition, the following pseudo variables can be used.
 
                   <%cat%>    - Platform non-specific command to cat a file.
                   <%cmp%>    - Platform non-specific compare command.
@@ -238,8 +217,7 @@ disallowed due to limitations of some workspace tools.
                   <%mv%>     - Platform non-specific move command.
                   <%os%>     - Returns either win32 or unix.
                   <%rm%>     - Platform non-specific delete command.
-                  <%rmdir%>  - Platform non-specific recursive directory
-                               delete command.
+                  <%rmdir%>  - Platform non-specific recursive directory delete command.
                   <%nul%>    - Platform non-specific null device.
                   <%pathsep%>- Platform non-specific path separator (; or :).
                   <%gt%>     - Project non-specific greater than sign.
@@ -250,8 +228,7 @@ disallowed due to limitations of some workspace tools.
                   <%slash%>  - Platform non-specific directory separator.
                   <%equote%> - Project non-specific escaped quote.
                   <%crlf%>   - Platform non-specific line ending.
-                  <%cmdsep%> - Project/platform non-specific command separator
-                               which always runs the right-hand side command.
+                  <%cmdsep%> - Project/platform non-specific command separator which always runs the right-hand side command. |
 `prebuild`        This is similar to postbuild except that it will be
                 performed before the build instead of after.
 `postclean`       This is similar to postbuild except that it will be
@@ -432,19 +409,9 @@ disallowed due to limitations of some workspace tools.
 
 | keyword | description |
 | --- | --- |
-| `dependent_upon` | This can only be applied to source and resx components.  It
-                determines which file the source or resx file is dependent
-                upon for vc8 - vc14, vs* only. |
-| `generates_source` | This can only be applied to resx components.  It indicates
-                that the resx file or files auto generates a source file for
-                vc8 - vc14, vs* only.  A value of '1' indicates that the
-                resx file generates a source file and the default generator is
-                used. Any other value indicates that the resx file generates a
-                source file and the generator name is taken from the value
-                supplied.  The auto generated name is created by taking the
-                resx file without the extension and appending .Designer.cs. |
-| `subtype`   | This can only be applied to source and resx components.  It
-                determines the SubType setting for vc8 - vc14, vs* only. |
+| `dependent_upon` | This can only be applied to source and resx components.  It determines which file the source or resx file is dependent upon for vc8 - vc14, vs* only. |
+| `generates_source` | This can only be applied to resx components.  It indicates that the resx file or files auto generates a source file for vc8 - vc14, vs* only.  A value of '1' indicates that the                 resx file generates a source file and the default generator is used. Any other value indicates that the resx file generates a source file and the generator name is taken from the value                supplied.  The auto generated name is created by taking the resx file without the extension and appending .Designer.cs. |
+| `subtype`   | This can only be applied to source and resx components.  It determines the SubType setting for vc8 - vc14, vs* only. |
 
 ## Custom File Definitions
 
