@@ -62,7 +62,7 @@ LIB_EXT      = <%lib64_ext%>
 OBJ_EXT      = <%obj64_ext%>
 THREADFLAGS  = <%thrflags64%>
 BINARYFLAGS  = <%binaryflags64%>
-LINKERPATHS  = -L"$(BDS)\lib\win64\debug" -L"$(BDS)\lib\win64\release"
+LINKERPATHS  = <%linkerpaths64%>
 WARNFLAGS64  = <%warnflags64%>
 <%else%>
 LINK32       = <%link32%>
@@ -73,7 +73,7 @@ LIB_EXT      = <%lib32_ext%>
 OBJ_EXT      = <%obj32_ext%>
 THREADFLAGS  = <%thrflags32%>
 BINARYFLAGS  = <%binaryflags32%>
-LINKERPATHS  = -L"$(BDS)\lib\win32\release" -L"$(BDS)\lib\win32\debug"
+LINKERPATHS  = <%linkerpaths32%>
 WARNFLAGS32  = <%warnflags32%>
 !else
 CC32C        = <%cc32c%>
@@ -81,7 +81,7 @@ LIB_EXT      = <%lib32c_ext%>
 OBJ_EXT      = <%obj32c_ext%>
 THREADFLAGS  = <%thrflags32c%>
 BINARYFLAGS  = <%binaryflags32c%>
-LINKERPATHS  = -L"$(BDS)\lib\win32c\debug" -L"$(BDS)\lib\win32c\release"
+LINKERPATHS  = <%linkerpaths32c%>
 WARNFLAGS32C = <%warnflags32c%>
 !endif
 <%endif%>
