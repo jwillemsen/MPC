@@ -45,7 +45,7 @@ binaryflags32c = -tR -tD
 binaryflags64 = -tR -tD
 linkerpaths32 = -L"$(BDS)\lib\win32\release" -L"$(BDS)\lib\win32\debug"
 linkerpaths32c = -L"$(BDS)\lib\win32c\debug" -L"$(BDS)\lib\win32c\release"
-linkerpaths64 = -L"$(BDS)\lib\win64\debug" -L"$(BDS)\lib\win64\release"
+linkerpaths64 = -L"$(BDS)\lib\win64\debug" -L"$(BDS)\lib\win64\release" -GE:HIGHENTROPYVA=off
 dllflags = -Tpd -Gi -x -Gn -w-dup
 libflags = /C
 ccflags  = -q
