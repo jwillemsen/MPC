@@ -114,7 +114,7 @@ linker_exe_arguments = $(EXEFLAGS) $(LFLAGS) $(STARTUP_OBJ) $(OBJFILES), $(OUTPU
 bcc64x {
 debug_flags = -g -O0
 release_flags = -Wno-ignored-attributes
-optimize_flags = -O3
+optimize_flags = -O1
 unicode_flags = -tU
 unicode_linker_flags = -tU
 debug_ext = .pdb
