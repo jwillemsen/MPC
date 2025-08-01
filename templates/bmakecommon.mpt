@@ -112,7 +112,7 @@ linker_exe_arguments = $(EXEFLAGS) $(LFLAGS) $(STARTUP_OBJ) $(OBJFILES), $(OUTPU
 }
 
 bcc64x {
-debug_flags = -g -O0
+debug_flags = -g -O0 -fsanitize=address
 release_flags = -Wno-ignored-attributes
 optimize_flags = -O3
 unicode_flags = -tU
@@ -138,6 +138,6 @@ tlib = tlib64
 dllflags = -tD -tR
 exeflags = -tR
 object_search_path = 0
-linker_dll_arguments = $(DLLFLAGS) $(UC_LFLAGS) $(LFLAGS:\=/) $(OBJFILES:\=/) -o $(OUTPUTDIR:\=/)$(NAME)$(DLL_EXT) -Xlinker --out-implib -Xlinker $(OUTPUTDIR:\=/)$(NAME).lib $(LIBFILES:\=/) $(RESOURCE:\=/)
-linker_exe_arguments = $(EXEFLAGS) $(UC_LFLAGS) $(LFLAGS:\=/) $(OBJFILES:\=/) -o $(OUTPUTDIR:\=/)$(NAME)$(EXE_EXT) $(LIBFILES:\=/) $(RESOURCE:\=/)
+linker_dll_arguments = -fsanitize=address $(DLLFLAGS) $(UC_LFLAGS) $(LFLAGS:\=/) $(OBJFILES:\=/) -o $(OUTPUTDIR:\=/)$(NAME)$(DLL_EXT) -Xlinker --out-implib -Xlinker $(OUTPUTDIR:\=/)$(NAME).lib $(LIBFILES:\=/) $(RESOURCE:\=/)
+linker_exe_arguments = -fsanitize=address $(EXEFLAGS) $(UC_LFLAGS) $(LFLAGS:\=/) $(OBJFILES:\=/) -o $(OUTPUTDIR:\=/)$(NAME)$(EXE_EXT) $(LIBFILES:\=/) $(RESOURCE:\=/)
 }
